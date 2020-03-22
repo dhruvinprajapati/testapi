@@ -14,7 +14,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        dd("ss");
     }
 
     /**
@@ -35,7 +35,14 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Test::insert([
+        //     ['title' => 'taylor@example.com', 'description' => 'hahaha']
+        // ]);
+        //dd("sdf");
+        $test = new Test();
+        $test->title = $request->title;
+        $test->description = $request->description;
+        $save = $test->save();
     }
 
     /**
