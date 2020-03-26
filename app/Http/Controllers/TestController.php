@@ -39,23 +39,18 @@ class TestController extends Controller
         // return $request->file('file');
          $file = $request->file('file');
 
-    $extension = $file->getClientOriginalExtension();
+        $extension = $file->getClientOriginalExtension();
 
-    $fullFileName = time(). '.'. $extension;
-    // $file->storeAs('images', $fullFileName,  ['disk' => 'local']);
-
-    
-    
-    // $userPhoto = public_path('images/').$name;
-    
-    \Image::make($file)->save('images/'.$fullFileName);
-    return 'uploaded Successfully';
+        $fullFileName = time(). '.'. $extension;
+        $file->storeAs('images', $fullFileName,  ['disk' => 'public']);
 
         $test = new Test();
         $test->title = $request->title;
         $test->description = $request->description;
-        $test->image = $name;
+        $test->image = $fullFileName;
         $save = $test->save();
+
+        return 'uploaded Successfully';
     }
 
     /**
