@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Test;
 use Illuminate\Http\Request;
+use Image;
 
 class TestController extends Controller
 {
@@ -35,11 +36,26 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->file('file');
+         $file = $request->file('file');
+
+    $extension = $file->getClientOriginalExtension();
+
+    $fullFileName = time(). '.'. $extension;
+    // $file->storeAs('images', $fullFileName,  ['disk' => 'local']);
+
+    
+    
+    // $userPhoto = public_path('images/').$name;
+    
+    \Image::make($file)->save('images/'.$fullFileName);
+    return 'uploaded Successfully';
+
         $test = new Test();
         $test->title = $request->title;
         $test->description = $request->description;
+        $test->image = $name;
         $save = $test->save();
-        return "sussec";
     }
 
     /**
