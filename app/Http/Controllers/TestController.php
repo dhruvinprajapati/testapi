@@ -42,7 +42,7 @@ class TestController extends Controller
         $extension = $file->getClientOriginalExtension();
 
         $fullFileName = time(). '.'. $extension;
-        $file->storeAs('images', $fullFileName,  ['disk' => 'public']);
+        $file->storeAs('/', $fullFileName,  ['disk' => 'publicImage']);
 
         $test = new Test();
         $test->title = $request->title;
